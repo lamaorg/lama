@@ -31,7 +31,7 @@ func init() {
 
 type Transaction struct {
 	ID             string
-	Nonce          string
+	Nonce          uint32
 	Proof          string
 	Hash           string
 	Value          *big.Int
