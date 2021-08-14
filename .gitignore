@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+.secret
+.env
+.keys
+.data
+.lamas
+.proofs
+.log
+.tmp
+.cache
+
+vendors/*
