@@ -1,13 +1,18 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
-	"github.com/lamaorg/lama/common"
+	"github.com/lamaorg/lama/cmd"
 	_ "github.com/lamaorg/lama/common"
+	"github.com/lamaorg/lama/internals/primitives"
+	"math/big"
 )
 
+var chainID *big.Int
+
 func main() {
-	addr := new(common.Address)
-	a := addr.New()
-	spew.Dump(a)
+
+	if chainID == nil {
+		chainID = primitives.GenerateChainID()
+	}
+	cmd.Execute()
 }
