@@ -2,13 +2,21 @@ package common
 
 import (
 	"golang.org/x/crypto/sha3"
+	"hash"
 	"math/big"
 )
 
-func HashBlock(b *big.Int) []byte {
+func (h Hashing) HashBlock(b *big.Int) []byte {
 
-	hash := sha3.New512()
-	hash.Write(b.Bytes())
-	return hash.Sum(nil)
+	h.hasher = sha3.New512()
+	h.hasher.Reset()
+	h.hasher.Write(b.Bytes())
+	return h.hasher.Sum(nil)
 
+}
+
+type Hashing struct {
+	hasher hash.Hash
+	src    *big.Int
+	dst    []byte
 }

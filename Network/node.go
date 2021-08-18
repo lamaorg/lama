@@ -49,7 +49,8 @@ func (n LLxPosNetwork) GenerateNewBlock(Validator *Node) (*primitives.LamaBlockc
 	}
 	newBlockBytes, _ := json.Marshal(newBlock)
 	blockBytes := new(big.Int).SetBytes(newBlockBytes).SetBytes(prevroot)
-	hash := common.HashBlock(blockBytes)
+	var hasher common.Hashing
+	hash := hasher.HashBlock(blockBytes)
 	newBlock.Hash = hash
 	if err := n.ValidateBlockCandidate(newBlock); err != nil {
 		Validator.Stake -= 10

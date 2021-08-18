@@ -30,7 +30,7 @@ type SecureMessage struct {
 	receiverKey  []byte
 }
 
-func (s SecureKeys) Create() {
+func (s *SecureKeys) Create() *SecureKeys {
 
 	key := k.NewKyber512()
 	d3 := d.NewDilithium3()
@@ -44,6 +44,8 @@ func (s SecureKeys) Create() {
 	dk1, dk2 := d3.KeyGen(s.seed)
 	s.DK1 = dk1
 	s.DK2 = dk2
+
+	return s
 
 }
 
