@@ -6,8 +6,12 @@ package api
 
 import (
 	"bytes"
-	"encoding/gob"
+	"crypto/rand"
+
+	"encoding/json"
+
 	"io/ioutil"
+
 	"os"
 )
 
@@ -18,7 +22,7 @@ func Bootstrapper() {
 	k := api.Keys.Create()
 
 	var keys bytes.Buffer
-	enc := gob.NewEncoder(&keys)
+	enc := json.NewEncoder(&keys)
 
 	err := enc.Encode(&k)
 	if err != nil {
@@ -38,4 +42,16 @@ func Bootstrapper() {
 
 func init() {
 	Bootstrapper()
+
+}
+
+func generatePersonalSecretForWallet() ([]byte, error) {
+
+	key := make([]byte, 16)
+	if _, err := rand.Read(key); err != nil {
+		return nil, err
+	}
+
+	return key, nil
+
 }

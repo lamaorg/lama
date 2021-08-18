@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
 	"math/big"
 	"strconv"
 )
@@ -139,7 +138,7 @@ func EncodeNewHex(toEncode []byte, ctx string) string {
 
 	var h HexOperator
 	hext := h.EncodeHex(toEncode, ctx)
-	spew.Dump(hext)
+
 	return hext
 
 }
