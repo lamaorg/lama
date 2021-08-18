@@ -11,10 +11,10 @@ import (
 */
 
 type FileUtils interface {
-	EncodeStruct(encoder *gob.Encoder, s struct{}) ([]byte, error)
-	WriteEncodedStructToLocalFile(enc []byte, filename string)
-	LoadStructFromFile(filename string) *struct{}
-	DecodeStruct(decoder *gob.Decoder, s []byte) *struct{}
+	EncodeStruct(s interface{}) ([]byte, error)
+	WriteEncodedStructToLocalFile(i interface{}, filename string) bool
+	LoadStructFromFile(filename string) interface{}
+	DecodeStruct(i interface{}) interface{}
 	LoadJsonFile(filename string) []byte
 	WriteJsonFile(filename string, data []byte)
 	WriteNewReceiptToDisk(filename string, data []byte)

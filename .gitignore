@@ -39,5 +39,7 @@
 .log
 .tmp
 .cache
+.certs
+.seeds
 
 vendors/*
