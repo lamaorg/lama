@@ -1,0 +1,15 @@
+{
+  "ChainID": 727622700297924360362044461472256988456135625684575751776372339971619488398732508466304820428826020375182602,
+  "VersionID": 129949305417265,
+  "OriginatingHost": "",
+  "OriginalValidators": null,
+  "CoinbaseAddress": "LLxFGv9NReyoI5NDnZA5puAFa2wYm2HCrZYtrn3uc7rrbQp",
+  "Coin": null,
+  "StakingCoin": null,
+  "GenesisValidators": null,
+  "BlockRoot": "9891cb51392ef3746263e677a8fb50836f2995b1efd05d831bac2a798b33106c",
+  "GenesisTime": 1629309952611961000,
+  "NextBlockHash": "",
+  "Signature": "",
+  "Proof": "16105727c2972fa3c4337504587c5a27c479db9cc291d027f58ec19ff9d56b8876426495c197f94f438ce2a1f021d34dc1385529c2e0ee6936533decb2fc6b73"
+}

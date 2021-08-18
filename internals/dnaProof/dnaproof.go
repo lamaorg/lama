@@ -339,7 +339,7 @@ func (o *Organism) calculateFitness(target []byte) {
 
 }
 
-func GetProof(params TemperProofParams, blockTime time.Time) *Proof {
+func GetProof(params TemperProofParams, blockTime time.Time) (string, string) {
 
 	opp := NewOperator(params)
 
@@ -388,8 +388,7 @@ func GetProof(params TemperProofParams, blockTime time.Time) *Proof {
 
 			proof := NewProof(encoded)
 
-			spew.Dump(proof)
-			return proof
+			return proof.hash, proof.hmac
 
 		} else {
 			maxFitness := bo.Fitness
@@ -399,7 +398,7 @@ func GetProof(params TemperProofParams, blockTime time.Time) *Proof {
 
 	}
 
-	return nil
+	return "", ""
 
 }
 

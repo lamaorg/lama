@@ -25,6 +25,7 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.AddCommand(WalletCMD)
+	rootCmd.AddCommand(GenesisCMD)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "./config/.lama.json", "config file (default is config/.lama.json)")
 	rootCmd.PersistentFlags().StringVarP(&mainAccountAddress, "mainAccountAddress", "w", "", "LLx Address to use this node (your wallet address)")
 	viper.BindPFlag("usewallet", rootCmd.PersistentFlags().Lookup("mainAccountAddress"))

@@ -9,12 +9,8 @@ import (
 type SecureKeys struct {
 	kyberInst     *k.Kyber
 	dilithiumInst *d.Dilithium
-	//those should never be public unsecure and unpacked
-	privateKey *k.PrivateKey
-	//those should never be public unsecure and unpacked
-	publicKey *k.PublicKey
-	shared    []byte
-	seed      []byte
+	shared        []byte
+	seed          []byte
 	//packed private key
 	PSK []byte
 	//packed public key
@@ -33,14 +29,15 @@ type SecureMessage struct {
 func (s *SecureKeys) Create() *SecureKeys {
 
 	key := k.NewKyber512()
-	d3 := d.NewDilithium3()
+	d3 := d.NewDilithium2()
 	s.kyberInst = key
 	s.dilithiumInst = d3
 	seed, _ := GenRandomBytes(64)
 	s.seed = seed
 	pk, sk := key.KeyGen(seed)
-	s.publicKey = key.UnpackPK(pk)
-	s.privateKey = key.UnpackSK(sk)
+
+	s.PSK = sk
+	s.PPK = pk
 	dk1, dk2 := d3.KeyGen(s.seed)
 	s.DK1 = dk1
 	s.DK2 = dk2
@@ -87,7 +84,7 @@ func (s SecureKeys) Encrypt(msg []byte) ([]byte, error) {
 
 func (s SecureKeys) SecureSign(msg []byte) []byte {
 
-	return s.dilithiumInst.Sign(s.PSK, msg)
+	return s.dilithiumInst.Sign(s.DK2, msg)
 
 }
 

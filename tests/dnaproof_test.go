@@ -1,9 +1,10 @@
 package tests
 
 import (
+	"github.com/lamaorg/lama/internals/dnaProof"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
-	"lamanodrama/lama/internals/dnaProof"
+
 	"testing"
 	"time"
 )
@@ -11,7 +12,7 @@ import (
 func (suite *LamaDnaProofTestSuite) TestGetProof() {
 
 	currentTime := time.Now()
-	assert.NotNil(suite.T(), dnaProof.GetProof(suite.params, currentTime))
+	assert.NotNil(suite.T(), interface{}(dnaProof.GetProof(suite.params, currentTime)))
 
 }
 
