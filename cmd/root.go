@@ -25,7 +25,7 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.AddCommand(WalletCMD)
-	rootCmd.AddCommand(GenesisCMD)
+	rootCmd.AddCommand(ChainCMD)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "./config/.lama.json", "config file (default is config/.lama.json)")
 	rootCmd.PersistentFlags().StringVarP(&mainAccountAddress, "mainAccountAddress", "w", "", "LLx Address to use this node (your wallet address)")
 	viper.BindPFlag("usewallet", rootCmd.PersistentFlags().Lookup("mainAccountAddress"))
@@ -67,5 +67,16 @@ var WalletCMD = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.DebugFlags()
 		fmt.Println("LLama Wallet Operator... ")
+	},
+}
+
+var ChainCMD = &cobra.Command{
+	Use:   "chain",
+	Short: "start a new chain",
+	Long:  "start a new chain",
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.DebugFlags()
+
+		fmt.Println("LLama Chain starter... ")
 	},
 }

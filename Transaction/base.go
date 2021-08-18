@@ -1,7 +1,6 @@
 package Transaction
 
 import (
-	"github.com/lamaorg/lama/internals/primitives"
 	"math/big"
 )
 
@@ -27,7 +26,7 @@ type Transaction struct {
 
 type CoinbaseTx interface {
 	IsCoinbase() bool
-	GetCoinInfo() *primitives.Coin
+	GetCoinInfo() string
 }
 
 func (t *Transaction) CoinbaseType() *Transaction {

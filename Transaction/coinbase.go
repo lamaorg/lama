@@ -2,14 +2,14 @@ package Transaction
 
 import (
 	"github.com/lamaorg/lama/common/address"
-	"github.com/lamaorg/lama/internals/primitives"
+
 	"math/big"
 	"time"
 )
 
 type Coinbase struct {
 	ID                  *big.Int
-	Currency            *primitives.Currency
+	Currency            string
 	CoinCache           map[string]string
 	Address             string
 	Issuer              string

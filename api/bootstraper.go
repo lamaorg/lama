@@ -7,8 +7,9 @@ package api
 import (
 	"bytes"
 	"crypto/rand"
-
 	"encoding/json"
+	"github.com/lamaorg/lama/common"
+	"github.com/lamaorg/lama/internals/primitives"
 
 	"io/ioutil"
 
@@ -17,9 +18,9 @@ import (
 
 func Bootstrapper() {
 
-	var api API
 	// generate chain keys
-	k := api.Keys.Create()
+	var sc common.SecureKeys
+	k := sc.Create()
 
 	var keys bytes.Buffer
 	enc := json.NewEncoder(&keys)
@@ -37,6 +38,8 @@ func Bootstrapper() {
 	if err != nil {
 		panic(err)
 	}
+
+	primitives.NewBlockchain()
 
 }
 
