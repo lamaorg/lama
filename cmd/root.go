@@ -26,6 +26,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.AddCommand(WalletCMD)
 	rootCmd.AddCommand(ChainCMD)
+	rootCmd.AddCommand(P2PRPC)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "./config/.lama.json", "config file (default is config/.lama.json)")
 	rootCmd.PersistentFlags().StringVarP(&mainAccountAddress, "mainAccountAddress", "w", "", "LLx Address to use this node (your wallet address)")
 	viper.BindPFlag("usewallet", rootCmd.PersistentFlags().Lookup("mainAccountAddress"))
@@ -33,6 +34,7 @@ func init() {
 	rootCmd.PersistentFlags().Bool("testnet", false, "use Llama test network")
 	rootCmd.PersistentFlags().Bool("local", false, "setup a local node for Llama")
 	WalletCMD.PersistentFlags().Bool("create", false, "create a new wallet")
+	P2PRPC.PersistentFlags().Bool("start", false, "start the rpc services interface")
 
 }
 

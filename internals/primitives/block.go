@@ -7,8 +7,10 @@ import (
 
 const HEXTYPE = "INTERNAL"
 
+type BlockID *big.Int
+
 type Block struct {
-	ChainID        *big.Int
+	ID             BlockID
 	Time           int64
 	PrevRootHash   []byte
 	Hash           []byte

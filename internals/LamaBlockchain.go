@@ -1,82 +1,24 @@
-package primitives
+package internals
 
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/davecgh/go-spew/spew"
 	tx "github.com/lamaorg/lama/Transaction"
 	"github.com/lamaorg/lama/common"
 	"github.com/lamaorg/lama/internals/dnaProof"
-	"github.com/lamaorg/lama/storage"
+	"github.com/lamaorg/lama/internals/primitives"
 	"github.com/lunixbochs/struc"
 	"io/ioutil"
 	"math/big"
 	"os"
-	"sync"
 	"time"
 )
 
-type iLamaBlockchain interface {
-	getChainID() *big.Int
-	setChainID()
-	getBlocks() []*iBlock
-	localStorage() storage.LocalStorage
-	getProcessor() *Processor
-}
-
 type LamaBlockchain struct {
 	Genesis *Genesis
-	Blocks  []*Block
+	Blocks  []*primitives.Block
 
 	iLamaBlockchain
-}
-
-type Processor struct {
-	GenesisID               *big.Int
-	BlockRouterID           *big.Int
-	OracleID                *big.Int
-	BlockStorage            storage.LocalStorage
-	txQueue                 []interface{}
-	LamaChain               LamaBlockchain
-	txChan                  chan txToProcess
-	blockChan               chan blockToProcess
-	registerNewTxChan       chan chan<- NewTx
-	unregisterNewTxChan     chan chan<- NewTx
-	registerTipChangeChan   chan chan<- TipChange
-	unregisterTipChangeChan chan chan<- TipChange
-	newTxChannels           map[chan<- NewTx]struct{}
-	tipChangeChannels       map[chan<- TipChange]struct{}
-	shutdownChan            chan struct{}
-
-	wg sync.WaitGroup
-}
-
-type TipChange struct {
-	BlockID *big.Int // block ID of the main chain tip block
-	Block   *Block   // full block
-	Source  string   // who sent the block that caused this change
-	Connect bool     // true if the tip has been connected. false for disconnected
-	More    bool     // true if the tip has been connected and more connections are expected
-}
-
-type blockToProcess struct {
-	id         *big.Int     // block ID
-	block      *Block       // block to process
-	source     string       // who sent it
-	resultChan chan<- error // channel to receive the result
-}
-
-type txToProcess struct {
-	id         *big.Int        // transaction ID
-	tx         *tx.Transaction // transaction to process
-	source     string          // who sent it
-	resultChan chan<- error    // channel to receive the result
-}
-
-type NewTx struct {
-	TransactionID *big.Int        // transaction ID
-	Transaction   *tx.Transaction // new transaction
-	Source        string          // who sent it
 }
 
 func (L *LamaBlockchain) LoadGenesis() {
@@ -166,13 +108,9 @@ type Genesis struct {
 func NewBlockchain() {
 	chain := new(LamaBlockchain)
 	chain.LoadGenesis()
-	spew.Dump(chain)
+
 }
 
 func init() {
 	NewBlockchain()
-}
-
-func NewProcessor(genesisID *big.Int, blockStore storage.LocalStorage, txQueue []tx.Transaction, chain LamaBlockchain) *Processor {
-	return &Processor{}
 }

@@ -9,8 +9,7 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"github.com/lamaorg/lama/common"
-	"github.com/lamaorg/lama/internals/primitives"
-
+	"github.com/lamaorg/lama/internals"
 	"io/ioutil"
 
 	"os"
@@ -39,7 +38,7 @@ func Bootstrapper() {
 		panic(err)
 	}
 
-	primitives.NewBlockchain()
+	internals.NewBlockchain()
 
 }
 

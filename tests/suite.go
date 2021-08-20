@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"lamanodrama/lama/internals/dnaProof"
+	"github.com/lamaorg/lama/internals/dnaProof"
 
 	"github.com/stretchr/testify/suite"
 	"time"

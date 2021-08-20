@@ -9,8 +9,6 @@ import (
 	"log"
 )
 
-const EMPTYBLOCKROOT = "Llx000000002069732061207368697474792073656e74656e636520746f2074657374Lx41444452"
-
 var (
 	GenesisCMD = &cobra.Command{
 		Use:   "genesis",
